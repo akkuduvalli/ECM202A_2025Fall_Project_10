@@ -85,6 +85,8 @@ Use figures generously:
 - Algorithm/model block diagram  
 - Hardware setup photos  
 
+💡 Tip: Add images, diagrams, and code snippets. Make your system reproducible.
+
 Recommended subsections:
 
 ### **3.1 System Architecture**
@@ -100,8 +102,7 @@ Use math, pseudocode, or diagrams as needed.
 Explain equipment, libraries, or frameworks.
 
 ### **3.5 Key Design Decisions & Rationale**
-
-💡 Tip: Add images, diagrams, and code snippets. Make your system reproducible.
+Describe the main design decisions you made.
 
 ---
 
@@ -160,7 +161,8 @@ List:
 
 ---
 
-[!NOTE] Read and then delete the material from this line onwards.
+> [!NOTE] 
+> Read and then delete the material from this line onwards.
 
 # 🧭 **Guidelines for a Strong Project Website**
 
