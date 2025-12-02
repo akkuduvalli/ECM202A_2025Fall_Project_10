@@ -1,83 +1,155 @@
-# Title
+⸻
 
-Project's title
+Project Title
 
-# Team
+A concise, descriptive title for your project.
 
-* Name of team member \#1 
-* Name of team member \#2 (delete this if necessary)
-* Name of team member \#3 (delete this if necessary)
+(Optional: Add a hero image or conceptual figure.)
 
-# Abstract
+⸻
 
-Provide a brief overview of the project's specific aim, approach, and key findings.
+👥 Team
+	•	Student Name #1 (email, GitHub)
+	•	Student Name #2 (delete if not applicable)
+	•	Student Name #3 (delete if not applicable)
 
-# Slides
+⸻
 
-* [Midterm Checkpoint Presentation Slides](http://)
-* [Final Presentation Slides](http://)
+📝 Abstract
 
-# 1. Introduction
+Provide a short paragraph (4–6 sentences) summarizing:
+	•	The problem you addressed
+	•	Your approach
+	•	Key results
+	•	The significance of your findings
 
-In addition to general motivation and context, the introduction must cover the following items as specific subsections.
+This section should stand alone as the “TL;DR” for your project.
 
-## Motivation & Objective
-What are you trying to do and why? (plain English without jargon)
+⸻
 
-## State of the Art & Its Limitations
-How is it done today, and what are the limits of current practice?
+📑 Slides
+	•	Midterm Checkpoint Slides￼
+	•	Final Presentation Slides￼
 
-## Novelty & Rationale
-What is new in your approach and why do you think it will be successful?
-
-## Potential Impact
-If the project were to be successful, what difference will it make, both technically and broadly?
-
-## Challenges
-What are the technical challenges in realizing the project? 
-
-## Metrics of Success
-What are metrics to assess success of your project?
-
-# 2. Related Work
-
-# 3. Technical Approach
-
-# 4. Evaluation and Results
-
-# 5. Discussion and Conclusions
-
-# 6. References
-
-# 7. Supplementary Material
-
-## 7.a. Datasets
-
-List datasets that the project uses. Provide link to access the dataset and a detailed description of any pre-processing needed.
-
-## 7.b. Software
-
-List external softwate tools and libraries that the project uses. Provide link to access the software.
+⸻
 
 
+1. Introduction
 
+Use the introduction to set context, describe the motivation, and preview your goals. Include diagrams or motivating examples.
 
+1.1 Motivation & Objective
 
+What are you trying to do and why is it important? Explain clearly and without jargon.
 
-## 9. Related Work
+1.2 State of the Art & Its Limitations
 
-### 9.a. Papers
+What do existing methods do? What are their limitations? Cite key references.
 
-List the key papers that you have identified relating to your project idea, and describe how they related to your project. Provide references (with full citation in the References section below).
+1.3 Novelty & Rationale
 
-### 9.b. Datasets
+What’s new about your approach? Why do you expect it to work?
 
-List datasets that you have identified and plan to use. Provide references (with full citation in the References section below).
+1.4 Potential Impact
 
-### 9.c. Software
+If successful, what technical and broader impacts could this project have?
 
-List softwate that you have identified and plan to use. Provide references (with full citation in the References section below).
+1.5 Challenges
 
-## 10. References
+What are the main technical or practical hurdles?
 
-List references corresponding to citations in your text above. For papers please include full citation and URL. For datasets and software include name and URL.
+1.6 Metrics of Success
+
+Define the measurable criteria you will use to evaluate performance.
+
+⸻
+
+2. Related Work
+
+Summarize and cite prior work related to your project.
+Explain how each reference connects to your approach and what gaps remain.
+
+⸻
+
+3. Technical Approach
+
+Describe your full system / methodology. Use visuals liberally.
+
+Recommended subsections:
+
+• System Architecture
+
+Include a block diagram or pipeline figure.
+
+• Data Pipeline
+
+Explain how data is collected, processed, and used.
+
+• Algorithm / Model
+
+Use math, pseudocode, or diagrams as needed.
+
+• Hardware / Software Setup
+
+Explain equipment, libraries, or frameworks.
+
+💡 Tip: Add images, diagrams, and code snippets. Make your system reproducible.
+
+⸻
+
+4. Evaluation & Results
+
+Include clear, well-labeled figures. Consider:
+	•	Accuracy, latency, energy plots
+	•	Comparative tables
+	•	Visualizations (spectrograms, heatmaps, bounding boxes)
+	•	Ablation results
+	•	Failure-case analysis
+
+Each figure should have a caption and a short interpretation.
+
+⸻
+
+5. Discussion & Conclusions
+
+Summarize insights:
+	•	What worked well?
+	•	What didn’t? Why?
+	•	Limitations
+	•	Future directions
+
+This should synthesize—not merely repeat—your results.
+
+⸻
+
+6. References
+
+Provide full citations for:
+	•	Academic papers
+	•	Software tools
+	•	Datasets
+
+Use a consistent style.
+
+⸻
+
+7. Supplementary Material
+
+7.a. Datasets
+
+Describe each dataset:
+	•	Source and URL
+	•	Data format
+	•	Preprocessing steps
+	•	Labeling/annotation efforts
+
+Include your internal dataset if you collected one.
+
+7.b. Software
+
+List:
+	•	External libraries or models
+	•	Internal modules you wrote
+	•	Links to repos or documentation
+
+⸻

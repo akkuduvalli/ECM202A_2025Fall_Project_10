@@ -4,5 +4,16 @@ show_downloads: true
 # google_analytics:[Your Google Analytics tracking ID]
 
 # Name of website
-title: myProjectTitle
-description: Project for UCLA ECEM202A/CSM213A
+title: "EC M202A Project – Project Title"
+description: "Course project website for EC M202A / CS M213A"
+# For user pages, url should be "https://username.github.io" and baseurl: ""
+# For project pages, url: "https://username.github.io" and baseurl: "/repo-name"
+url: ""        # students can fill in later if they want
+baseurl: ""    # e.g., "/ecm202a-project-myteam"
+
+markdown: kramdown
+kramdown:
+  input: GFM
+
+# Necessary for GitHub Pages
+plugins: []
