@@ -1,7 +1,6 @@
 # Repository template for ECEM202A/CSM213A projects
 
-## Structure overview
-
+## 🧩 Structure Overview
 * doc/ for GitHub Pages website content
 * software/ for code used in your project
 * data/ for data data used in your project
@@ -26,7 +25,7 @@ Please update docs/\_config.yml with your project's metadata such as title and d
 Your website is your final report – treat it like a conference-style project writeup, but more visual and accessible.
 
 
-## Guidelines for a Strong Project Website
+## 🧭 Guidelines for a Strong Project Website
 
 
 ### 1. Include Figures & Visuals Liberally
@@ -68,3 +67,17 @@ Figures must:
 ### 6. Cite generously
 
 A typical project should cite 5–12 relevant papers.
+
+## 📊 Minimum vs. Excellent Rubric
+
+
+| **Component**        | **Minimum (B/C-level)**                                         | **Excellent (A-level)**                                                                 |
+|----------------------|---------------------------------------------------------------|------------------------------------------------------------------------------------------|
+| **Introduction**     | Vague motivation; little structure                             | Clear motivation; structured subsections; strong narrative                                |
+| **Related Work**     | 1–2 citations; shallow summary                                 | 5–12 citations; synthesized comparison; clear gap identification                          |
+| **Technical Approach** | Text-only; unclear pipeline                                  | Architecture diagram, visuals, pseudocode, design rationale                               |
+| **Evaluation**       | Small or unclear results; few figures                          | Multiple well-labeled plots, baselines, ablations, and analysis                           |
+| **Discussion**       | Repeats results; little insight                                | Insightful synthesis; limitations; future directions                                      |
+| **Figures**          | Few or low-quality visuals                                     | High-quality diagrams, plots, qualitative examples, consistent style                      |
+| **Website Presentation** | Minimal formatting; rough writing                           | Clean layout, good formatting, polished writing, hyperlinks, readable organization        |
+| **Reproducibility**  | Missing dataset/software details                               | Clear dataset description, preprocessing, parameters, software environment, instructions   |
