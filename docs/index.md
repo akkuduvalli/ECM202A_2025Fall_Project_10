@@ -152,7 +152,6 @@ Also, if I had more time, I would continue researching the potential of establis
 
 # **6. References**
 
-Provide full citations for all sources (academic papers, websites, etc.) referenced and all software and datasets uses.
 
 - **tfoldi/go2-webrtc** – WebRTC API for Unitree GO2 Robots: provides a WebRTC-based real-time communication and control interface for Unitree GO2 series robots.  
   https://github.com/tfoldi/go2-webrtc
