@@ -83,6 +83,7 @@ The high level architecture of the system involves using the Raspberry Pi to est
 
 
 ### **3.4 Raspberry Pi to ESP32 UART Pipeline**
+UART Messaging protocol design:
 ![UART](./assets/img/uart_design.jpeg)  
 The reason I chose UART as the communication protocl between the Pi and the ESP32 is that is simple, has separate TX/RX lines (as opposed to I2C), and it is relatively easy to design a packet protocol for both directions to accommodate larger packets using UART. There is also robust serial support in both Zephyr and in Python. I had also looked into SPI, but the ESP32 SPI device does not have peripheral mode support (in hardware / in the Zephyr driver), and neither does Raspberry Pi, so it wasn’t feasible, as the controller-peripheral pipeline is imperative to SPI. 
 
@@ -97,12 +98,12 @@ For the UART packet design protocol, the packets are sent and received as follow
 This packet structure allows asynchronous message passing and receival, perfect for the bidirectional link between the Pi and ESP32, for which messaging intervals are not determined.
 
 ### **3.5 Zephyr Application Design **
-
+Zephyr application Design:
 ![Zephyr](./assets/img/zephyr.jpeg)  
 The Zephyr main application (`main.c`) launches two threads to `process_messages.c` and `uart_rx_tx.c`, which is the main UART processing thread. The main application also defines a `json_rx_queue` and a `json_tx_queue`. The UART thread waits on messages to the `json_tx_queue`, which are messages pushed in the Zephyr application that are intended to be sent out to the Raspberry Pi. The UART thread also continuously waits on messages from the UART RX port, and pushed them to the `json_rx_queue`, which notifies the process_messages thread for further processing, such as JSON decoding. 
 
 ### **3.6 Zephyr Shell Design **
-
+Zephyr Shell commands:
 ![Zephyr Shell](./assets/img/zephyr_shell.png)  
 To test this platform and establish control to the Go2 robots from the ESP32, I developed a Zephyr Shell application that uses a UART backend to be able to send custom messages to the Go2 such as 
 
