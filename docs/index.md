@@ -44,7 +44,7 @@ Use the introduction to clearly set context, describe motivation, and explain th
 The Unitree Go2 Robot unofficially has one way to communicate (receive/send messages) without using the provided hardware/software tools - through establishing a WebRTC connection and opening a datachannel to subcribe to various sensor/state topics. This approach exists as a python-based open-source implementation that has been adapted for other platforms such as ROS2, but there is no official porting avenue for microcontroller based unitree Go2 robot control. 
 
 ### **1.2 State of the Art & Its Limitations**  
-Previous implementations such as the Unitree Go2 ROS2 SDK Project [Nuralem] or the original WebRTC hack implementation go2-webrtc [Foldi] execute on a python-based backend, leveraging the python library [aiortc](https://github.com/aiortc/aiortc), a complete WebRTC ecosystem. There exist little resources online for developing a WebRTC client on a microcontroller, and there are no microcontroller based solutions specifically for Unitree Go2 robots. 
+Previous implementations such as the Unitree Go2 ROS2 SDK Project [Nuralem] or the original WebRTC hack implementation `go2-webrtc` [Foldi] execute on a python-based backend, leveraging the python library [aiortc](https://github.com/aiortc/aiortc), a complete WebRTC ecosystem. There exist little resources online for developing a WebRTC client on a microcontroller, and there are no microcontroller based solutions specifically for Unitree Go2 robots. 
 
 ### **1.3 Novelty & Rationale**  
 What is unique about this new approach is that the primary control is offloaded to the microcontroller, including message construction, message decoding, and specific control to the Unitree Go2 Robot. Because it leverages a Raspberry Pi to extablish a WebRTC connection instead of implementing it directly on a microcontroller, this solution bypasses the need to develop a full WebRTC client directly on a microcontroller, instead focusing more on developing a platform to establish Go2 robot control. 
@@ -62,7 +62,7 @@ The specific metrics used to evaluate this project is functionally being able to
 
 # **2. Related Work**
 
-The original Go2 WebRTC implementation is [go2-webrtc](https://github.com/tfoldi/go2-webrtc) [Foldi], from which all similar platforms are based upon. go2-webrtc leverages the `aiortc` Python library to execute the full WebRTC stack to be able to establish a connection and open a datachannel to the Go2 robot, for video streaming, sensor streaming, and robot actuation control. Based on this approach is the [go2-ros-sdk](https://github.com/abizovnuralem/go2_ros2_sdk/tree/master) [Nuralem], which leverages the original framework to expand into a full SDK in ROS2, subscribing to various sensor topics including lidar, IMU, etc. and camera streaming in order to create a complete application with a full Go2 robot view. Another robust Python API that uses the Go2 WebRTC driver to communicate is [unitree-webrtc-connect](https://github.com/legion1581/unitree_webrtc_connect), which also contains audio and video support. All of these frameworks are python-based, and all leverage the `aiortc` WebRTC library. I used all of these as references to leverage when developing a WebRTC platform connection on the Raspberry Pi to connect to the Go2 Robot. 
+The original Go2 WebRTC implementation is [go2-webrtc](https://github.com/tfoldi/go2-webrtc) [Foldi], from which all similar platforms are based upon. `go2-webrtc` leverages the `aiortc` Python library to execute the full WebRTC stack to be able to establish a connection and open a datachannel to the Go2 robot, for video streaming, sensor streaming, and robot actuation control. Based on this approach is the [go2-ros-sdk](https://github.com/abizovnuralem/go2_ros2_sdk/tree/master) [Nuralem], which leverages the original framework to expand into a full SDK in ROS2, subscribing to various sensor topics including lidar, IMU, etc. and camera streaming in order to create a complete application with a full Go2 robot view. Another robust Python API that uses the Go2 WebRTC driver to communicate is [unitree-webrtc-connect](https://github.com/legion1581/unitree_webrtc_connect), which also contains audio and video support. All of these frameworks are python-based, and all leverage the `aiortc` WebRTC library. I used all of these as references to leverage when developing a WebRTC platform connection on the Raspberry Pi to connect to the Go2 Robot. 
 
 ---
 
@@ -173,7 +173,14 @@ Provide full citations for all sources (academic papers, websites, etc.) referen
 
 # **7. Supplementary Material**
 
-## **7.a. Software**
+## **7.a. Hardware**
+
+Current Setup requires a Raspberry Pi and an ESP32s3 N16R8. 
+
+UART Wiring Diagram:
+![Wiring](./assets/img/wiring.jpeg)  
+
+## **7.b. Software**
 
 The `Python` Folder Contains all necessary Raspberry Pi execution files. 
 * `webrtc_go2_connection.py` Go2Connection class for connecting to the Go2 robots
@@ -183,8 +190,6 @@ Installation and Execution:
 * clone this repository
 * `cd python `
 * create a python virtual environment and run `pip install -r requirements.txt`
-* Run the following for proxy requirements:
-
 
 * Run `web_rtc_go2_client.py` for establishing webrtc connection and opening the datachannel (replace ip address with the address of the go2 robot)
 * Run `pi_to_esp_uart.py` for debugging UART with ESP32
