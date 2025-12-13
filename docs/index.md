@@ -3,20 +3,17 @@ layout: default
 title: "Project Title"
 ---
 
-# **Project Title**
+# **Exploring Real-Time WebRTC Interface on MCUs & MPUs for Unitree GO2 Robots**
 
-*A concise, descriptive title for your project.*
+*ESP32 and Raspberry Pi interface for communicating with Unitree Go2 Robots*
 
 ![Project Banner](./assets/img/banner-placeholder.png)  
-<sub>*(Optional: Replace with a conceptual figure or meaningful image.)*</sub>
 
 ---
 
 ## 👥 **Team**
 
-- Student Name #1 (email, GitHub)  
-- Student Name #2 *(delete if not applicable)*  
-- Student Name #3 *(delete if not applicable)*  
+- Akshara Kuduvalli (akuduvalli@ucla.edu, @akkuduvalli)  
 
 ---
 
@@ -31,13 +28,15 @@ Provide a short paragraph (4–6 sentences) summarizing:
 
 This should be a standalone “TL;DR” of your project.
 
+The motivation for this project is that there is one main Unitree GO2 Web-based Communication Interface using WebRTC (that all similar implementations are based on), but is designed to run on a full computer. The goal of this project is to establish control from a microcontroller to the Go2 Robot, which enables a MCU-based platform for interacting with Go2 robots, opening up many avenues for future Go2 robot control from a microcontroller. To connect to Unitree Go2 Robots, opening a datachannel requires establishing a WebRTC connection, which requires the use of a full WebRTC stack, Crypto stack, and a signaling server. Due to resource limits and a general lack of WebRTC support, it is not suitable to implement a full WebRTC stack on a microcontroller. Instead, I introduced a Raspberry Pi as a medium to establish a WebRTC connection and open datachannel to the Go2 robot, and transmit and forward messages to an ESP32 over UART. On the ESP32, I use the Zephyr RTOS as the OS backend to process and send messages, and developed a custom list of shell commands to interact directly to the Go2 robot from an ESP32. With establishing succesful Go2 robot control, this serves an initial microntroller based platform for Go2 robot control. 
+
+
 ---
 
 ## 📑 **Slides**
 
 - [Midterm Checkpoint Slides](http://)  
 - [Final Presentation Slides](http://)
-- If Needed: Links to have any videos demonstrating your project
 
 ---
 
@@ -45,7 +44,7 @@ This should be a standalone “TL;DR” of your project.
 
 ## 🎛️ **Media**
 
-- Links to any video or audio recordings demonstrating your project
+- [Video Demo of Robot Control from an ESP32s3](http://)
 
 ---
 
