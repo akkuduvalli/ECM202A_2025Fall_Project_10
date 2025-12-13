@@ -83,7 +83,7 @@ The high level architecture of the system involves using the Raspberry Pi to est
 
 
 ### **3.4 Raspberry Pi to ESP32 UART Pipeline**
-UART Messaging protocol design:
+
 ![UART](./assets/img/uart_design.jpeg)  
 The reason I chose UART as the communication protocl between the Pi and the ESP32 is that is simple, has separate TX/RX lines (as opposed to I2C), and it is relatively easy to design a packet protocol for both directions to accommodate larger packets using UART. There is also robust serial support in both Zephyr and in Python. I had also looked into SPI, but the ESP32 SPI device does not have peripheral mode support (in hardware / in the Zephyr driver), and neither does Raspberry Pi, so it wasn’t feasible, as the controller-peripheral pipeline is imperative to SPI. 
 
@@ -97,12 +97,12 @@ For the UART packet design protocol, the packets are sent and received as follow
 
 This packet structure allows asynchronous message passing and receival, perfect for the bidirectional link between the Pi and ESP32, for which messaging intervals are not determined.
 
-### **3.5 Zephyr Application Design **
+### **3.5 Zephyr Application Design**
 Zephyr application Design:
 ![Zephyr](./assets/img/zephyr.jpeg)  
 The Zephyr main application (`main.c`) launches two threads to `process_messages.c` and `uart_rx_tx.c`, which is the main UART processing thread. The main application also defines a `json_rx_queue` and a `json_tx_queue`. The UART thread waits on messages to the `json_tx_queue`, which are messages pushed in the Zephyr application that are intended to be sent out to the Raspberry Pi. The UART thread also continuously waits on messages from the UART RX port, and pushed them to the `json_rx_queue`, which notifies the process_messages thread for further processing, such as JSON decoding. 
 
-### **3.6 Zephyr Shell Design **
+### **3.6 Zephyr Shell Design**
 Zephyr Shell commands:
 ![Zephyr Shell](./assets/img/zephyr_shell.png)  
 To test this platform and establish control to the Go2 robots from the ESP32, I developed a Zephyr Shell application that uses a UART backend to be able to send custom messages to the Go2 such as 
@@ -122,20 +122,17 @@ Organizing the Zephyr applications into multiple threads allows for clean execut
 
 # **4. Evaluation & Results**
 
-Present experimental results with clarity and professionalism.
+![Zephyr Shell](./assets/img/zephyr_shell.png)  
+I verified robot control through a couple of different commands, testing to see that the command executed as expected on the Go2 robot. 
 
-Include:
+![Flash](./assets/img/stress_testing.png)  
+I ran larger stress testing of continuously sending JSON messages from the raspberry pi to the esp32 ~500 continuously, and saw good results with all passed messages received, which was a valuable test in system durability with continuous messaging. 
 
-- Plots (accuracy, latency, energy, error curves)  
-- Tables (comparisons with baselines)  
-- Qualitative visualizations (spectrograms, heatmaps, bounding boxes, screenshots)  
-- Ablation studies  
-- Error analysis / failure cases
+![Flash](./assets/img/messages_dropped.png)  
+However, from stress testing larger messages (~300-400 bytes) I found that there exist limits with UART messaging rates with testing at a 115200 baud rate for both directions. I saw UART messages being dropped at under 2s between messages. 
 
-Each figure should have a caption and a short interpretation.
-
-Add some message dropping results, also see if you can finally get the loopback test working 
-And also add the Zephyr usage diagram, which was helpful to see it was a pretty lighweight applciation
+![Flash](./assets/img/flash_usage.png)  
+The Zephyr Flash Usage for this application sits at 3.44% of the total ESP32s3 Flash, which is a very lightweight application. 
 
 ---
 
@@ -157,44 +154,61 @@ Also, if I had more time, I would continue researching the potential of establis
 
 Provide full citations for all sources (academic papers, websites, etc.) referenced and all software and datasets uses.
 
+- **tfoldi/go2-webrtc** – WebRTC API for Unitree GO2 Robots: provides a WebRTC-based real-time communication and control interface for Unitree GO2 series robots.  
+  https://github.com/tfoldi/go2-webrtc
+
+- **legion1581/unitree_webrtc_connect** – Unitree Go2 and G1 WebRTC driver: a Python implementation of the WebRTC driver used by the Unitree Go APP, enabling connection and control of Go2 AIR/PRO/EDU robots without firmware modifications.  
+  https://github.com/legion1581/unitree_webrtc_connect 
+
+- **abizovnuralem/go2_ros2_sdk (go2_interfaces)** – Part of the unofficial ROS2 SDK support for Unitree GO2 AIR/PRO/EDU robots, this subfolder contains ROS2 interface definitions and message types used for Go2 ROS integrations. The larger SDK enables WebRTC (Wi-Fi) and CycloneDDS (Ethernet) connectivity with ROS2.  
+  https://github.com/abizovnuralem/go2_ros2_sdk/tree/master/go2_interfaces 
+
+- **gkiryaziev/Zephyr_ESP32S3-N16R8** – Zephyr RTOS Hello World template for the ESP32-S3 N16R8 board: a minimal, production-ready project setup with one-click build/flash/monitor in VS Code, pre-configured for 16 MB flash and 8 MB PSRAM.  
+  https://github.com/gkiryaziev/Zephyr_ESP32S3-N16R8
+
+- **aiortc/aiortc** – A Python implementation of WebRTC and ORTC: provides asyncio-based APIs for real-time peer-to-peer communication, supporting audio, video, data channels, ICE, DTLS, and SRTP, commonly used for WebRTC applications in Python.  
+  https://github.com/aiortc/aiortc
+
 ---
 
 # **7. Supplementary Material**
 
 ## **7.a. Software**
 
-List:
-* External libraries or models
-* Internal modules you wrote
-* Links to repos or documentation
+The `Python` Folder Contains all necessary Raspberry Pi execution files. 
+* `webrtc_go2.py` Go2Connection class for connecting to the Go2 robots
+* 
 
-Basically the software folder design and how to reproduce it 
+Installation and Execution:
+* clone this repository
+* `cd python `
+* create a python virtual environment and run `pip install -r requirements.txt`
+* Run the following for proxy requirements:
+
+
+The `Zephyr` library contains all necessary ESP32s3 execution files. 
+Execution and Build Files:
+* `CMakeLists.txt` - build pipeline
+* `esp32s3_devkitc.overlay` - devicetree overlay for ESP32s3 hardware enable options
+* `prj.conf` - software and device configuration options
+
+* Source Files (under `/src`:
+* `main.c` - main execution loop
+* `process_messages.c` - processing RX messages thread
+* `uart_rx_tx.c` - UART RX/TX thread
+* `go2_shell.c` - go2 shell commands
+* `command_generator.h` - go2 robot command generation
+* `threads.h` - thread constants
+* `constants.h` - go2 constants
+
+Installation and Execution:
+* First, install and configure the Zephyr RTOS platform for your machine
+* activate the `west` build environment for Zephyr
+* clone this repository
+* `cd Zephyr/Zephyr_ESP32S3-N16R8`
+* To compile, run `west build -b esp32s3_devkitc/esp32s3/procpu -- -DOVERLAY_CONFIG=prj.conf -DDTC_OVERLAY_FILE=esp32s3_devkitc.overlay`
+* To flash the board, `west flash`
+* To open the serial monitor, run  `west espressif monitor`
+* With the Raspberry Pi application running, now you can run things such as `go2 send Dance1` or `go2 standup` to be able to control the Go2 Robot!
 
 ---
-
-> [!NOTE] 
-> Read and then delete the material from this line onwards.
-
-# 🧭 **Guidelines for a Strong Project Website**
-
-- Include multiple clear, labeled figures in every major section.  
-- Keep the writing accessible; explain acronyms and algorithms.  
-- Use structured subsections for clarity.  
-- Link to code or datasets whenever possible.  
-- Ensure reproducibility by describing parameters, versions, and preprocessing.  
-- Maintain visual consistency across the site.
-
----
-
-# 📊 **Minimum vs. Excellent Rubric**
-
-| **Component**        | **Minimum (B/C-level)**                                         | **Excellent (A-level)**                                                                 |
-|----------------------|---------------------------------------------------------------|------------------------------------------------------------------------------------------|
-| **Introduction**     | Vague motivation; little structure                             | Clear motivation; structured subsections; strong narrative                                |
-| **Related Work**     | 1–2 citations; shallow summary                                 | 5–12 citations; synthesized comparison; clear gap identification                          |
-| **Technical Approach** | Text-only; unclear pipeline                                  | Architecture diagram, visuals, pseudocode, design rationale                               |
-| **Evaluation**       | Small or unclear results; few figures                          | Multiple well-labeled plots, baselines, ablations, and analysis                           |
-| **Discussion**       | Repeats results; little insight                                | Insightful synthesis; limitations; future directions                                      |
-| **Figures**          | Few or low-quality visuals                                     | High-quality diagrams, plots, qualitative examples, consistent style                      |
-| **Website Presentation** | Minimal formatting; rough writing                           | Clean layout, good formatting, polished writing, hyperlinks, readable organization        |
-| **Reproducibility**  | Missing dataset/software details                               | Clear dataset description, preprocessing, parameters, software environment, instructions   |
