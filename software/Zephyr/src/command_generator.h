@@ -1,3 +1,6 @@
+/* Based on Python implementation in go2_robot_sdk/go2_robot_sdk/application/utils/command_generator.py 
+https://github.com/abizovnuralem/go2_ros2_sdk */
+
 #include <zephyr/kernel.h>
 #include <zephyr/random/random.h>
 #include <zephyr/sys/printk.h>
