@@ -1,11 +1,5 @@
 # Raspberry PI to ESP32 UART bidirectional link 
-# recieves actuation commands from the esp32s3, sends LIDAR data back to the esp32
-
-# next steps:
-# parse webrtc specific messages
-# construct messages specific to unitree go2 (using the correct protocol) -> should be fine
-
-# figure out the user input interface 
+# recieves actuation commands from the esp32s3, send commands to the esp32 (test)
 
 import serial
 import struct
